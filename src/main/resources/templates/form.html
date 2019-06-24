@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script type="text/javascript" th:src="@{/js/jquery-1.12.0.min.js}"></script>
+    <meta charset="UTF-8">
+    <script type="text/javascript">
+        function doLogin(){
+            var name = $("#name");
+            var age = $("#age");
+            var isLogin = true;
+
+            if(name.val().trim() === "" || name.length < 1){
+                alert('Please enter your name');
+                name.focus();
+                isLogin = false;
+                return isLogin;
+            }
+            if(age.val().trim() === "" || age.length < 1){
+                alert('Please enter your age');
+                age.focus();
+                isLogin = false;
+                return isLogin;
+            }
+            if (isLogin === true) {
+                $('form').submit();
+            }
+
+        }
+    </script>
+    <title>Validation</title>
+</head>
+<body>
+<h2>Hello World</h2>
+    <form th:action="@{/sign-up}" th:object="${personVO}" th:method="post" onSubmit="doLogin();return false;">
+        <table>
+            <tr>
+                <td>Name:</td>
+                <td><input id="name" type="text" th:field="*{name}" /></td>
+                <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
+            </tr>
+            <tr>
+                <td>Age:</td>
+                <td><input id="age" type="text" th:field="*{age}" /></td>
+                <td th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age Error</td>
+            </tr>
+            <tr>
+                <td><button>Submit</button></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

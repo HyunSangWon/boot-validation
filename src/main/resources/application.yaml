@@ -1,0 +1,11 @@
+spring:
+  thymeleaf:
+    cache: false
+    mode: HTML
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+  freemarker:
+    cache: false
